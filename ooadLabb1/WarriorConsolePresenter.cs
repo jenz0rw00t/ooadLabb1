@@ -13,8 +13,14 @@ namespace ooadLabb1
 
         private void presentWarrior()
         {
-            Console.WriteLine("\nTHIS WARRIOR HAS CHANGED: ");
-            Console.WriteLine(warrior);
+            Console.WriteLine("\n----Warrior----" +
+                "\n Name: " + warrior.Name +
+                "\n Weapon of choice: " + warrior.Weapon +
+                "\n Battlecry: " + warrior.Battlecry +
+                "\n Shield: " + $"{(warrior.HasShield ? "Yes" : "No")}" +
+                "\n Health: " + warrior.Health +
+                "\n Strength: " + warrior.Strength +
+                "\n Dexterity: " + warrior.Dexterity);
         }
     }
 }

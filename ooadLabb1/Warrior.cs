@@ -107,18 +107,6 @@ namespace ooadLabb1
             }
         }
 
-        public override string ToString()
-        {
-            return "\n----Warrior----" +
-                "\n Name: " + Name +
-                "\n Weapon of choice: " + Weapon +
-                "\n Battlecry: " + Battlecry +
-                "\n Shield: " + $"{(HasShield ? "Yes" : "No")}" +
-                "\n Health: " + Health +
-                "\n Strength: " + Strength +
-                "\n Dexterity: " + Dexterity;
-        }
-
         public class Builder
         {
             private string name = "Unnamed warrior";
