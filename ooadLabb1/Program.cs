@@ -15,32 +15,31 @@ namespace ooadLabb1
                 .SetStrength(15)
                 .SetDexterity(8)
                 .CreateWarrior();
+
             Warrior w2 = Warrior.Builder.StartBuild().SetName("Jens").CreateWarrior();
 
             IWarriorPresenter consolePresenter = new WarriorConsolePresenter();
             IWarriorPresenter imagePresenter = new WarriorImagePresenter();
-            PresenterNotifier presenterNotifier = new PresenterNotifier();
-            presenterNotifier.addPresenter(consolePresenter);
-            presenterNotifier.addPresenter(imagePresenter);
+            w1.addObserver(consolePresenter);
+            w1.addObserver(imagePresenter);
+            w2.addObserver(consolePresenter);
+            w2.addObserver(imagePresenter);
 
             CommandManager manager = CommandManager.Instance;
 
             manager.Execute(new ChangeNameAction("Pelle", w1));
 
-            presenterNotifier.notifyPresenters(w1);
-
             manager.Execute(new ChangeHasShieldAction(false, w1));
 
-            presenterNotifier.notifyPresenters(w1);
+            manager.Execute(new ChangeHasShieldAction(true, w2));
+
+            w1.removeObserver(imagePresenter);
 
             manager.Undo();
 
-            presenterNotifier.notifyPresenters(w1);
-
             manager.Undo();
 
-            presenterNotifier.notifyPresenters(w1);
-
+            manager.Redo();
 
         }
     }

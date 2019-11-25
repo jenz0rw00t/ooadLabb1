@@ -1,14 +1,82 @@
-﻿namespace ooadLabb1
+﻿using System.Collections.Generic;
+
+namespace ooadLabb1
 {
     public class Warrior
     {
-        public string Name { get; set; }
-        public string Weapon { get; set; }
-        public string Battlecry { get; set; }
-        public bool HasShield { get; set; }
-        public int Health { get; set; }
-        public int Strength { get; set; }
-        public int Dexterity { get; set; }
+        private string _name;
+        private string _weapon;
+        private string _battlecry;
+        private bool _hasShield;
+        private int _health;
+        private int _strength;
+        private int _dexterity;
+
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                notifyObservers();
+            }
+        }
+        public string Weapon
+        {
+            get => _weapon;
+            set
+            {
+                _weapon = value;
+                notifyObservers();
+            }
+        }
+        public string Battlecry
+        {
+            get => _battlecry;
+            set
+            {
+                _battlecry = value;
+                notifyObservers();
+            }
+        }
+        public bool HasShield
+        {
+            get => _hasShield;
+            set
+            {
+                _hasShield = value;
+                notifyObservers();
+            }
+        }
+        public int Health
+        {
+            get => _health;
+            set
+            {
+                _health = value;
+                notifyObservers();
+            }
+        }
+        public int Strength
+        {
+            get => _strength;
+            set
+            {
+                _strength = value;
+                notifyObservers();
+            }
+        }
+        public int Dexterity
+        {
+            get => _dexterity;
+            set
+            {
+                _dexterity = value;
+                notifyObservers();
+            }
+        }
+
+        private List<IWarriorPresenter> presenters = new List<IWarriorPresenter>();
 
         public Warrior(string name, string weapon, string battlecry, bool hasShield, int health, int strength, int dexterity)
         {
@@ -19,6 +87,24 @@
             Health = health;
             Strength = strength;
             Dexterity = dexterity;
+        }
+
+        public void addObserver(IWarriorPresenter presenter)
+        {
+            presenters.Add(presenter);
+        }
+
+        public void removeObserver(IWarriorPresenter presenter)
+        {
+            presenters.Remove(presenter);
+        }
+
+        private void notifyObservers()
+        {
+            foreach (var presenter in presenters)
+            {
+                presenter.update(this);
+            }
         }
 
         public override string ToString()
